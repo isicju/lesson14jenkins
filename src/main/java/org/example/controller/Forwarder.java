@@ -1,10 +1,7 @@
 package org.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +34,11 @@ public class Forwarder {
         HttpEntity<byte[]> entity = new HttpEntity<>(headers);
 
         ResponseEntity<byte[]> response = restTemplate.exchange(forwardUrl, method, entity, byte[].class);
-        return response;
+        HttpStatus statusCode = response.getStatusCode();
+        byte[] body = response.getBody();
+        HttpHeaders responseHeaders = response.getHeaders();
+
+        return new ResponseEntity<>(body, responseHeaders, statusCode);
     }
 
 
