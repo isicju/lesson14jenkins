@@ -26,8 +26,14 @@ import java.util.List;
 @Configuration
 public class MyConfig {
 
-    @Value("${databaseurl}")
+    @Value("${ENV_DATABASE}")
     private String url;
+
+    @Value("${ENV_CACHE_IP}")
+    private String cacheIp;
+
+    @Value("${ENV_CACHE_PORT}")
+    private int cachePort;
 
     @Bean("employeeDataSource")
     public DataSource mariaDbDataSource() throws SQLException {
@@ -54,7 +60,7 @@ public class MyConfig {
 
     @Bean
     public MemcachedClient memcachedClient() throws IOException {
-        return new MemcachedClient(new InetSocketAddress("185.106.92.118", 11211));
+        return new MemcachedClient(new InetSocketAddress(cacheIp, cachePort));
     }
 
     @Bean
