@@ -26,13 +26,13 @@ import java.util.List;
 @Configuration
 public class MyConfig {
 
-    @Value("${ENV_DATABASE}")
+    @Value("${ENV_DATABASE:none}")
     private String url;
 
-    @Value("${ENV_CACHE_IP}")
+    @Value("${ENV_CACHE_IP:none}")
     private String cacheIp;
 
-    @Value("${ENV_CACHE_PORT}")
+    @Value("${ENV_CACHE_PORT:0}")
     private int cachePort;
 
     @Bean("employeeDataSource")
