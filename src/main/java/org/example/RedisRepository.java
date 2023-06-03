@@ -5,7 +5,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RedisRepository {
+public class RedisRepository implements Test {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
@@ -17,4 +17,8 @@ public class RedisRepository {
         return redisTemplate.opsForValue().get(key);
     }
 
+    @Override
+    public int getSum(int a, int b) {
+        return 0;
+    }
 }
